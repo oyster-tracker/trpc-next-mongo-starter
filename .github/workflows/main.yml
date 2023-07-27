@@ -3,14 +3,13 @@ on: [push]
 jobs:
   e2e:
     services:
-      postgres:
-        image: postgres
+      mongo:
+        image: mongo
         env:
-          POSTGRES_DATABASE: trpcdb
-          POSTGRES_USER: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust
+          # MONGO_INITDB_ROOT_USERNAME: root
+          # MONGO_INITDB_ROOT_PASSWORD: example
         ports:
-          - 5432:5432
+          - 27017:27017
     env:
       NODE_ENV: test
       NEXTAUTH_SECRET: supersecret

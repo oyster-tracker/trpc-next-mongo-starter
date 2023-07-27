@@ -4,11 +4,12 @@
  * @link https://www.prisma.io/docs/guides/database/seed-database
  */
 import { PrismaClient } from '@prisma/client';
+import { ObjectId } from 'mongodb';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const firstPostId = '5c03994c-fc16-47e0-bd02-d218a370a078';
+  const firstPostId = new ObjectId().toHexString();
   await prisma.post.upsert({
     where: {
       id: firstPostId,
