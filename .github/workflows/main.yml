@@ -46,8 +46,8 @@ jobs:
           path: ${{ github.workspace }}/.next/cache
           key: ${{ runner.os }}-${{ runner.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}-nextjs
 
-      - name: Setup Prisma
-        run: pnpm prebuild
+      - name: Setup Mongo
+        run: echo "@todo setup mongo script"
 
       - name: Build and test
         run: pnpm build && pnpm test-start && pnpm test-dev

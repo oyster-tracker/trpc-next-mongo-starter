@@ -1,10 +1,10 @@
-# Prisma + tRPC
+# Typegoose + tRPC
 
 ## Features
 
 - 🧙‍♂️ E2E typesafety with [tRPC](https://trpc.io)
 - ⚡ Full-stack React with Next.js
-- ⚡ Database with Prisma
+- ⚡ Database with Mongo + Typegoose
 - ⚙️ VSCode extensions
 - 🎨 ESLint + Prettier
 - 💚 CI setup using GitHub Actions:
@@ -15,8 +15,8 @@
 ## Setup
 
 ```bash
-pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-cd trpc-prisma-starter
+pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-mongo-starter trpc-mongo-starter
+cd trpc-mongo-starter
 pnpm
 pnpm dx
 ```
@@ -31,8 +31,8 @@ pnpm dx
 ### Start project
 
 ```bash
-pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-cd trpc-prisma-starter
+pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-mongo-starter trpc-mongo-starter
+cd trpc-mongo-starter
 pnpm
 pnpm dx
 ```
@@ -40,8 +40,6 @@ pnpm dx
 ### Commands
 
 ```bash
-pnpm prebuild   # runs `prisma generate` + `prisma db push`
-pnpm build      # runs prebuild then runs `next build`
 pnpm db-reset   # resets local db
 pnpm dev        # starts next.js
 pnpm dx         # connects to mongo atlas + runs migrations + seeds + starts next.js
@@ -70,8 +68,8 @@ Go to [dashboard.render.com/blueprints](https://dashboard.render.com/blueprints)
   </thead>
   <tbody>
     <tr>
-      <td><a href="./prisma/schema.prisma"><code>./prisma/schema.prisma</code></a></td>
-      <td>Prisma schema</td>
+      <td><a href="./mongo/schema.json"><code>./mongo/schema.json</code></a></td>
+      <td>Mongo schema</td>
     </tr>
     <tr>
       <td><a href="./src/pages/api/trpc/[trpc].ts"><code>./src/pages/api/trpc/[trpc].ts</code></a></td>

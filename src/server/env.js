@@ -21,4 +21,5 @@ if (!env.success) {
   );
   process.exit(1);
 }
+
 module.exports.env = env.data;
