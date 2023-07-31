@@ -13,7 +13,8 @@ const IndexPage: NextPageWithLayout = () => {
     },
     {
       getPreviousPageParam(lastPage) {
-        return lastPage.nextCursor;
+        console.log({ lastPage });
+        return lastPage;
       },
     },
   );

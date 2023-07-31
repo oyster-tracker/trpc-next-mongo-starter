@@ -5,8 +5,8 @@
 import { router, publicProcedure } from '../trpc';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { dbConnect } from '~/server/mongo';
-import PostModel from '~/models/Post';
+import dbConnect from '~/server/mongo';
+import PostModel, { Post } from '~/models/Post';
 
 dbConnect().then().finally();
 
@@ -56,7 +56,7 @@ export const postRouter = router({
           message: `No post with id '${id}'`,
         });
       }
-      return post;
+      return post as Post;
     }),
   add: publicProcedure
     .input(

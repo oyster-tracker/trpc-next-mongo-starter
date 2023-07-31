@@ -3,7 +3,8 @@
  * @link https://www.mongo.io/docs/support/help-articles/nextjs-mongo-client-dev-practices
  */
 import { env } from './env';
-import { Schema, Mongoose, model, connect, createConnection } from 'mongoose';
+// import { Schema, Mongoose, model, connect, createConnection } from 'mongoose';
+import { Mongoose, connect } from 'mongoose';
 
 const mongoGlobal = global as typeof global & {
   mongoose?: Mongoose;

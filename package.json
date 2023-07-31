@@ -3,10 +3,10 @@
   "version": "10.35.0",
   "private": true,
   "scripts": {
-    "dx:next": "run-s migrate-dev db-seed && next dev",
+    "dx:next": "run-s migrate && next dev",
     "dx": "run-p dx:* --print-label",
     "dev": "pnpm dx:next",
-    "prebuild": "run-s generate migrate-dev",
+    "migrate": "echo \"No migrations to run\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint --cache --ext \".js,.ts,.tsx\" --report-unused-disable-directives --report-unused-disable-directives src",
