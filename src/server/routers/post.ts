@@ -7,6 +7,7 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import dbConnect from '~/server/mongo';
 import PostModel, { Post } from '~/models/Post';
+import { FilterQuery, ProjectionType, QueryOptions } from 'mongoose';
 
 dbConnect().then().finally();
 
@@ -15,25 +16,33 @@ export const postRouter = router({
     .input(
       z.object({
         limit: z.number().min(1).max(100).nullish(),
-        cursor: z.string().nullish(),
+        page: z.number().min(1).nullish(),
+        cursor: z.number().nullish(),
       }),
     )
-    .query(async ({ input }) => {
+    .query(async ({ input, ctx }) => {
       /**
        * For pagination docs you can have a look here
        * @see https://trpc.io/docs/useInfiniteQuery
        * @see https://www.mongodb.com/docs/atlas/atlas-search/tutorial/pagination-tutorial/
        * @see https://www.mongodb.com/docs/drivers/node/v5.7/fundamentals/crud/read-operations/skip/
        */
+      console.log('input', input);
+      console.log('ctx', ctx);
+      const limit = input.limit ?? 25;
+      const page = input.page ?? 1;
+      const skip = input.cursor ? page * limit : 0;
 
-      const limit = input.limit ?? 50;
+      const filter: FilterQuery<Post> = {};
+      const projection: ProjectionType<Post> = {};
+      const options: QueryOptions<Post> = {
+        sort: { createdAt: -1 },
+        skip,
+        limit,
+      };
+      const items = await PostModel.find(filter, projection, options);
 
-      const items = await PostModel.find({
-        // where: {},
-        orderBy: {
-          createdAt: 'desc',
-        },
-      }).skip(limit);
+      console.log(`Found ${items.length} Posts`);
 
       return {
         items: items.reverse(),
@@ -47,15 +56,15 @@ export const postRouter = router({
     )
     .query(async ({ input }) => {
       const { id } = input;
-      const post = await PostModel.findById({
-        where: { id },
-      });
+      const post = await PostModel.findById(id);
       if (!post) {
         throw new TRPCError({
           code: 'NOT_FOUND',
           message: `No post with id '${id}'`,
         });
       }
+      console.log('byId', post);
+
       return post as Post;
     }),
   add: publicProcedure
@@ -68,7 +77,7 @@ export const postRouter = router({
     )
     .mutation(async ({ input }) => {
       const post = await PostModel.create({
-        data: input,
+        ...input,
       });
       return post;
     }),

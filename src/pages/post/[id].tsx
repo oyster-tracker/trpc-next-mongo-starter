@@ -9,6 +9,10 @@ type PostByIdOutput = RouterOutput['post']['byId'];
 
 function PostItem(props: { post: PostByIdOutput }) {
   const { post } = props;
+  const { createdAt } = post;
+  const dateString = createdAt
+    ? new Date(createdAt).toLocaleDateString('en-us')
+    : 'a moment ago';
   console.log('Post', post);
   return (
     <div className="flex flex-col justify-center h-full px-8 ">
@@ -16,9 +20,7 @@ function PostItem(props: { post: PostByIdOutput }) {
         Home
       </Link>
       <h1 className="text-4xl font-bold">{post.title}</h1>
-      <em className="text-gray-400">
-        Created {post.createdAt?.toLocaleDateString('en-us')}
-      </em>
+      <em className="text-gray-400">Created {dateString}</em>
 
       <p className="py-4 break-all">{post.text}</p>
 

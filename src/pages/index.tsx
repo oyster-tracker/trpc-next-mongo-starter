@@ -5,19 +5,26 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import type { AppRouter } from '~/server/routers/_app';
 
+const PAGE_SIZE = 5;
+
 const IndexPage: NextPageWithLayout = () => {
   const utils = trpc.useContext();
   const postsQuery = trpc.post.list.useInfiniteQuery(
     {
-      limit: 5,
+      limit: PAGE_SIZE,
+      page: 1,
     },
     {
-      getPreviousPageParam(lastPage) {
-        console.log({ lastPage });
-        return lastPage;
+      getPreviousPageParam(firstPage, allPages) {
+        console.log('getPreviousPageParam', { firstPage, allPages });
+        // no new pages to load
+        if (firstPage.items.length < PAGE_SIZE) return undefined;
+        return true;
       },
     },
   );
+
+  console.log('postsQuery.data.pageParams', postsQuery.data?.pageParams);
 
   const addPost = trpc.post.add.useMutation({
     async onSuccess() {
@@ -67,7 +74,11 @@ const IndexPage: NextPageWithLayout = () => {
 
         <button
           className="bg-gray-900 p-2 rounded-md font-semibold disabled:bg-gray-700 disabled:text-gray-400"
-          onClick={() => postsQuery.fetchPreviousPage()}
+          onClick={() =>
+            postsQuery.fetchPreviousPage({
+              pageParam: 1,
+            })
+          }
           disabled={
             !postsQuery.hasPreviousPage || postsQuery.isFetchingPreviousPage
           }
@@ -80,11 +91,14 @@ const IndexPage: NextPageWithLayout = () => {
         </button>
 
         {postsQuery.data?.pages.map((page, index) => (
-          <Fragment key={page.items[0]?.id || index}>
+          <Fragment key={page.items[0]?._id ?? index}>
             {page.items.map((item) => (
-              <article key={item.id}>
+              <article key={item._id as unknown as string}>
                 <h3 className="text-2xl font-semibold">{item.title}</h3>
-                <Link className="text-gray-400" href={`/post/${item.id}`}>
+                <Link
+                  className="text-gray-400"
+                  href={`/post/${item._id as unknown as string}`}
+                >
                   View more
                 </Link>
               </article>

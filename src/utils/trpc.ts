@@ -46,6 +46,7 @@ export interface SSRContext extends NextPageContext {
  */
 export const trpc = createTRPCNext<AppRouter, SSRContext>({
   config({ ctx }) {
+    console.log('createTRPCNext.config.ctx', ctx);
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr
