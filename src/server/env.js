@@ -13,13 +13,19 @@ const envSchema = z.object({
 });
 
 const env = envSchema.safeParse(process.env);
+// console.log('parsed env vars', env);
 
 if (!env.success) {
   console.error(
     '❌ Invalid environment variables:',
-    JSON.stringify(env.error.format(), null, 4),
+    JSON.stringify(env.error.format(), null, 2),
   );
-  process.exit(1);
+  // timeout necessary to see error in console
+  setTimeout(() => {
+    process.exit(1);
+  }, 0);
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore this is incorrect, but it's fine for now
 module.exports.env = env.data;

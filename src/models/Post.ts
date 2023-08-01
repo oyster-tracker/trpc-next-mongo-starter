@@ -1,19 +1,16 @@
 import { getModelForClass, prop, defaultClasses } from '@typegoose/typegoose';
-import type { Types } from 'mongoose';
+import mongoose from 'mongoose';
 // import {
 //   IObjectWithTypegooseFunction,
 //   BeAnObject,
 // } from '@typegoose/typegoose/lib/types';
 // import { Document, Types } from 'mongoose';
 
-export class Post
-  extends defaultClasses.TimeStamps
-  implements defaultClasses.Base
-{
-  @prop()
-  public _id!: Types.ObjectId;
+export class Post extends defaultClasses.TimeStamps {
+  public _id?: mongoose.Types.ObjectId;
+
   public get id() {
-    return this._id.toHexString();
+    return this._id?.toHexString();
   }
 
   @prop({ required: true })

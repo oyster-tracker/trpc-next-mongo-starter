@@ -63,7 +63,6 @@ export const postRouter = router({
           message: `No post with id '${id}'`,
         });
       }
-      console.log('byId', post);
 
       return post as Post;
     }),

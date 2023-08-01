@@ -13,6 +13,7 @@
     "lint-fix": "pnpm lint --fix",
     "test": "run-s test:*",
     "test:unit": "vitest run",
+    "test:debug:unit": "vitest run --test-timeout 10000",
     "test:e2e": "playwright test",
     "test-dev": "start-server-and-test dev http://127.0.0.1:3000 test",
     "test-start": "start-server-and-test start http://127.0.0.1:3000 test",
