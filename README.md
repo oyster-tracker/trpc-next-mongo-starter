@@ -14,6 +14,14 @@
 
 ## Setup
 
+### Environment
+
+Use .env.sample to create a local and test version and update it with the name of your local MongoDB database.
+
+```bash
+cp .env.sample .env.local .env.test.local
+```
+
 ```bash
 pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-mongo-starter trpc-mongo-starter
 cd trpc-mongo-starter
