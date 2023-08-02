@@ -24,7 +24,7 @@ const IndexPage: NextPageWithLayout = () => {
     },
   );
 
-  console.log('postsQuery.data.pageParams', postsQuery.data?.pageParams);
+  // console.log('postsQuery.data.pageParams', postsQuery.data?.pageParams);
 
   const addPost = trpc.post.add.useMutation({
     async onSuccess() {
@@ -91,7 +91,7 @@ const IndexPage: NextPageWithLayout = () => {
         </button>
 
         {postsQuery.data?.pages.map((page, index) => (
-          <Fragment key={page.items[0]?._id ?? index}>
+          <Fragment key={index}>
             {page.items.map((item) => (
               <article key={item._id as unknown as string}>
                 <h3 className="text-2xl font-semibold">{item.title}</h3>

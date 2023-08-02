@@ -1,4 +1,7 @@
 /**
+ * @jest-environment jest-environment-node
+ * @jest-environment-options {}
+ *
  * Integration test example for the `post` router
  */
 import { createContextInner } from '../context';

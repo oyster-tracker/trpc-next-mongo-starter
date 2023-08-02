@@ -5,11 +5,8 @@
 import { router, publicProcedure } from '../trpc';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import dbConnect from '~/server/mongo';
 import PostModel, { Post } from '~/models/Post';
 import { FilterQuery, ProjectionType, QueryOptions } from 'mongoose';
-
-dbConnect().then().finally();
 
 export const postRouter = router({
   list: publicProcedure

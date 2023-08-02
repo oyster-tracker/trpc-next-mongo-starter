@@ -46,7 +46,7 @@ export interface SSRContext extends NextPageContext {
  */
 export const trpc = createTRPCNext<AppRouter, SSRContext>({
   config({ ctx }) {
-    console.log('createTRPCNext.config.ctx', ctx);
+    // console.log('createTRPCNext.config.ctx', ctx);
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr
@@ -96,6 +96,8 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
   },
   /**
    * @link https://trpc.io/docs/ssr
+   * @link https://nextjs.org/docs/pages/building-your-application/data-fetching/get-server-side-props
+   * @warning incompatible with nextjs `getServerSideProps`
    */
   ssr: true,
   /**
