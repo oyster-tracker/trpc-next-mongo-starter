@@ -1,4 +1,4 @@
-import { trpc } from '../utils/trpc';
+import { trpc } from '../trpc';
 import { NextPageWithLayout } from './_app';
 import { inferProcedureInput } from '@trpc/server';
 import Link from 'next/link';

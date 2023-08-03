@@ -4,7 +4,7 @@
  *
  * Integration test example for the `post` router
  */
-import { createContextInner } from '../context';
+import { createContextInner } from '../../trpc/context';
 import { AppRouter, appRouter } from './_app';
 import { inferProcedureInput } from '@trpc/server';
 

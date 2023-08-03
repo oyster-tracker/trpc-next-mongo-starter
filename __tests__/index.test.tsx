@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import Home from '../src/pages/index';
-import { trpc } from '~/utils/trpc';
+import { trpc } from '~/trpc';
 
 import '@testing-library/jest-dom';
 

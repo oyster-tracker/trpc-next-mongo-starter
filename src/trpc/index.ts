@@ -25,6 +25,16 @@ function getBaseUrl() {
   return `http://127.0.0.1:${process.env.PORT ?? 3000}`;
 }
 
+export function getUrl(pages?: boolean) {
+  return getBaseUrl() + `/api/trpc${pages ? '-stream' : ''}`;
+}
+
+export function generateCacheTag(procedurePath: string, input: any) {
+  return input
+    ? `${procedurePath}?input=${JSON.stringify(input)}`
+    : procedurePath;
+}
+
 /**
  * Extend `NextPageContext` with meta data that can be picked up by `responseMeta()` when server-side rendering
  */
